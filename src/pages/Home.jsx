@@ -103,11 +103,11 @@ function Home() {
             <div className="bg-black rounded-lg overflow-hidden group cursor-pointer hover:scale-[1.02] transition-transform">
               <div className="aspect-[16/10] p-8 flex items-center justify-center relative">
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-48 h-48 rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-orange-500 blur-xl opacity-60"></div>
+                  <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-orange-500 blur-xl opacity-60"></div>
                 </div>
-                <div className="relative bg-black/80 backdrop-blur rounded-full p-8">
-                  <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center">
-                    <span className="text-white text-2xl">🔔</span>
+                <div className="relative bg-black/80 backdrop-blur rounded-full p-4 sm:p-6 md:p-8">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center">
+                    <span className="text-white text-lg sm:text-xl md:text-2xl">🔔</span>
                   </div>
                 </div>
               </div>

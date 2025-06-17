@@ -136,7 +136,7 @@ function LoadingScreen({ onLoadingComplete }) {
     <div ref={containerRef} className="fixed inset-0 z-[100] bg-black flex items-center justify-center overflow-hidden">
       {/* Sunburst background */}
       <div ref={sunburstRef} className="absolute inset-0 flex items-center justify-center">
-        <div className="absolute w-[800px] h-[800px]">
+        <div className="absolute w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] md:w-[600px] md:h-[600px] lg:w-[800px] lg:h-[800px]">
           <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 via-orange-400/20 to-yellow-400/20 rounded-full blur-3xl" />
           <div className="absolute inset-[20%] bg-gradient-to-r from-yellow-300/30 via-orange-300/30 to-yellow-300/30 rounded-full blur-2xl" />
           <div className="absolute inset-[40%] bg-gradient-to-r from-yellow-200/40 via-orange-200/40 to-yellow-200/40 rounded-full blur-xl" />
@@ -145,7 +145,7 @@ function LoadingScreen({ onLoadingComplete }) {
 
       {/* Main content */}
       <div className="relative z-10 flex items-center justify-center">
-        <div className="relative w-64 h-64 md:w-80 md:h-80">
+        <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-80 lg:h-80">
           {/* Glow effect behind logo */}
           <div ref={glowRef} className="absolute inset-0 flex items-center justify-center">
             <div className="w-full h-full bg-gradient-to-br from-yellow-400/50 via-orange-400/50 to-red-400/50 rounded-full blur-2xl" />
@@ -156,7 +156,7 @@ function LoadingScreen({ onLoadingComplete }) {
             <img 
               src={logoUrl} 
               alt="Kushie Brand Logo" 
-              className="w-48 h-48 md:w-64 md:h-64 object-contain drop-shadow-[0_0_30px_rgba(251,191,36,0.5)]"
+              className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-64 lg:h-64 object-contain drop-shadow-[0_0_30px_rgba(251,191,36,0.5)]"
             />
           </div>
         </div>
@@ -176,7 +176,7 @@ function LoadingScreen({ onLoadingComplete }) {
             }}
           >
             <div 
-              className="w-32 h-32 md:w-48 md:h-48 rounded-full"
+              className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full"
               style={{
                 background: `radial-gradient(circle, rgba(255,255,255,${0.4 - i * 0.05}) 0%, transparent 60%)`,
                 filter: 'blur(30px)',
@@ -205,8 +205,8 @@ function LoadingScreen({ onLoadingComplete }) {
       </div>
 
       {/* Bottom text */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-        <p className="text-yellow-600/60 text-sm uppercase tracking-wider font-light">
+      <div className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2">
+        <p className="text-yellow-600/60 text-xs sm:text-sm uppercase tracking-wider font-light">
           For Adults 21+ Only
         </p>
       </div>

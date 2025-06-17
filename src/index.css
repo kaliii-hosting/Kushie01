@@ -21,19 +21,7 @@ body {
 .container-custom {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 1rem;
-}
-
-@media (min-width: 640px) {
-  .container-custom {
-    padding: 0 1.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container-custom {
-    padding: 0 2rem;
-  }
+  width: 100%;
 }
 
 .text-gradient {
@@ -98,6 +86,13 @@ body {
 
 .animate-infinite-scroll {
   animation: infinite-scroll 30s linear infinite;
+}
+
+/* Slow down animation on mobile for better performance */
+@media (max-width: 640px) {
+  .animate-infinite-scroll {
+    animation-duration: 40s;
+  }
 }
 
 @keyframes float {
@@ -184,5 +179,30 @@ body {
 
 .loading-text-glow {
   animation: loading-text-glow 2s ease-in-out infinite;
+}
+
+/* Touch targets for mobile - minimum 44px height */
+.touch-target {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+/* Ensure buttons and links have proper tap areas on mobile */
+@media (max-width: 768px) {
+  button, a {
+    position: relative;
+  }
+  
+  /* Add invisible tap area extension for small buttons */
+  button:not(.touch-target)::after,
+  a:not(.touch-target)::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    bottom: -8px;
+    left: -8px;
+  }
 }
 

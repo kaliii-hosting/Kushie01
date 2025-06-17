@@ -22,20 +22,20 @@ function InfiniteScroll() {
   }, [])
 
   return (
-    <section className="py-8 bg-huly-dark overflow-hidden border-y border-white/10">
+    <section className="py-4 sm:py-6 md:py-8 bg-huly-dark overflow-hidden border-y border-white/10">
       <div ref={scrollRef} className="relative">
-        <div ref={scrollContentRef} className="flex items-center space-x-8 animate-infinite-scroll">
+        <div ref={scrollContentRef} className="flex items-center space-x-4 sm:space-x-6 md:space-x-8 animate-infinite-scroll">
           {/* Duplicate the features array multiple times for seamless loop */}
           {[...features, ...features, ...features].map((feature, index) => (
             <div
               key={index}
               className="flex items-center space-x-3 whitespace-nowrap"
             >
-              <span className="text-lg font-medium text-gray-400">
+              <span className="text-sm sm:text-base md:text-lg font-medium text-gray-400 whitespace-nowrap">
                 {feature}
               </span>
               {index < features.length * 3 - 1 && (
-                <span className="text-gray-600 text-xl">•</span>
+                <span className="text-gray-600 text-base sm:text-lg md:text-xl">•</span>
               )}
             </div>
           ))}
