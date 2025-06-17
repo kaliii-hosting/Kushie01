@@ -7,8 +7,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        'huly-dark': '#090A0C',
-        'huly-dark-secondary': '#111111',
+        'huly-dark': '#000000',
+        'huly-dark-secondary': '#0a0a0a',
         'huly-light': '#f6f6f6',
         'huly-blue': '#478BEB',
         'huly-orange': '#FF5F0B',

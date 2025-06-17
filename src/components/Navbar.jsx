@@ -4,8 +4,9 @@ import { Link, NavLink } from 'react-router-dom'
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [resourcesOpen, setResourcesOpen] = useState(false)
-  const [communityOpen, setCommunityOpen] = useState(false)
+  const [activeDropdown, setActiveDropdown] = useState(null)
+
+  const logoUrl = "https://fchtwxunzmkzbnibqbwl.supabase.co/storage/v1/object/sign/kushie01/aq1.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9hYzRiNjM2NS0xMjBkLTQ2ZWEtYWVhOC1mMjIxMWEwNWRiNzIiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJrdXNoaWUwMS9hcTEucG5nIiwiaWF0IjoxNzUwMTg3NzU2LCJleHAiOjIwNjU1NDc3NTZ9.rtUfRHavxCvpwK8brcPcGaoVxrfVlqxztzb_rg9uEKg"
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,203 +18,302 @@ function Navbar() {
   }, [])
 
   useEffect(() => {
-    // Mobile menu animations will be added after fixing the error
+    // Prevent scroll when mobile menu is open
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
   }, [isOpen])
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      scrolled ? 'bg-[#0B0B0D]/95 backdrop-blur-xl border-b border-gray-800' : 'bg-transparent'
-    }`}>
-      <div className="container-custom">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3">
-            <div className="relative">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-xl">H</span>
-              </div>
-              <div className="absolute -inset-1 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl blur opacity-30" />
-            </div>
-            <span className="text-2xl font-bold text-white">Huly</span>
-          </Link>
+    <>
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrolled ? 'bg-black/95 backdrop-blur-xl border-b border-white/10' : 'bg-transparent'
+      }`}>
+        <div className="container-custom">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <Link to="/" className="flex items-center">
+              <img 
+                src={logoUrl} 
+                alt="Kushie Brand" 
+                className="h-8 w-auto object-contain"
+              />
+            </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-10">
-            <div className="flex items-center space-x-8">
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center space-x-8">
+              <div className="flex items-center space-x-8">
+                <NavLink
+                  to="/pricing"
+                  className={({ isActive }) =>
+                    `text-gray-300 hover:text-white transition-colors font-medium text-sm ${isActive ? 'text-white' : ''}`
+                  }
+                >
+                  Pricing
+                </NavLink>
+                
+                {/* Resources Dropdown */}
+                <div 
+                  className="relative"
+                  onMouseEnter={() => setActiveDropdown('resources')}
+                  onMouseLeave={() => setActiveDropdown(null)}
+                >
+                  <button className="flex items-center space-x-1 text-gray-300 hover:text-white transition-colors font-medium text-sm">
+                    <span>Resources</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  {activeDropdown === 'resources' && (
+                    <div className="absolute top-full left-0 mt-2 bg-gray-900 rounded-lg shadow-lg py-2 min-w-[160px]">
+                      <NavLink to="/blog" className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 transition-colors">
+                        Blog
+                      </NavLink>
+                      <NavLink to="/docs" className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 transition-colors">
+                        Docs
+                      </NavLink>
+                      <NavLink to="/changelog" className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 transition-colors">
+                        Changelog
+                      </NavLink>
+                    </div>
+                  )}
+                </div>
+
+                {/* Community Dropdown */}
+                <div 
+                  className="relative"
+                  onMouseEnter={() => setActiveDropdown('community')}
+                  onMouseLeave={() => setActiveDropdown(null)}
+                >
+                  <button className="flex items-center space-x-1 text-gray-300 hover:text-white transition-colors font-medium text-sm">
+                    <span>Community</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  {activeDropdown === 'community' && (
+                    <div className="absolute top-full left-0 mt-2 bg-gray-900 rounded-lg shadow-lg py-2 min-w-[160px]">
+                      <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 transition-colors">
+                        X.com
+                      </a>
+                      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 transition-colors">
+                        LinkedIn
+                      </a>
+                      <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 transition-colors">
+                        YouTube
+                      </a>
+                      <a href="https://slack.com" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 transition-colors">
+                        Slack
+                      </a>
+                      <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 transition-colors">
+                        GitHub
+                      </a>
+                    </div>
+                  )}
+                </div>
+
+                <NavLink
+                  to="/download"
+                  className={({ isActive }) =>
+                    `text-gray-300 hover:text-white transition-colors font-medium text-sm ${isActive ? 'text-white' : ''}`
+                  }
+                >
+                  Download
+                </NavLink>
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="flex items-center space-x-4">
+                <a 
+                  href="https://github.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 text-gray-300 hover:text-white transition-colors font-medium text-sm flex items-center space-x-2"
+                >
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                  </svg>
+                  <span>Star Us</span>
+                </a>
+                <NavLink
+                  to="/signin"
+                  className="px-4 py-2 text-gray-300 hover:text-white transition-colors font-medium text-sm"
+                >
+                  Sign In
+                </NavLink>
+                <NavLink
+                  to="/signup"
+                  className="px-6 py-2 bg-white text-black rounded-lg font-medium text-sm hover:bg-gray-100 transition-colors"
+                >
+                  Get Started
+                </NavLink>
+              </div>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="lg:hidden text-white p-2 relative z-50"
+            >
+              <div className="w-6 h-5 relative flex flex-col justify-between">
+                <span className={`block h-0.5 w-full bg-white transform transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`} />
+                <span className={`block h-0.5 w-full bg-white transition-all duration-300 ${isOpen ? 'opacity-0' : ''}`} />
+                <span className={`block h-0.5 w-full bg-white transform transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+              </div>
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile Menu - Full Screen Overlay like huly.io */}
+      <div className={`fixed inset-0 bg-black z-40 lg:hidden transition-all duration-500 ${
+        isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+      }`}>
+        <div className={`h-full flex flex-col pt-24 px-6 transition-all duration-500 ${
+          isOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}>
+          <div className="flex-1 overflow-y-auto">
+            <div className="space-y-2">
               <NavLink
-                to="/features"
-                className={({ isActive }) =>
-                  `text-gray-300 hover:text-white transition-colors font-medium ${isActive ? 'text-white' : ''}`
-                }
+                to="/pricing"
+                className="block text-3xl font-semibold text-white hover:text-gray-300 transition-colors py-3"
+                onClick={() => setIsOpen(false)}
               >
-                Features
+                Pricing
               </NavLink>
               
+              {/* Resources Section */}
+              <div className="py-3">
+                <p className="text-3xl font-semibold text-white mb-4">Resources</p>
+                <div className="pl-4 space-y-2">
+                  <NavLink
+                    to="/blog"
+                    className="block text-xl text-gray-400 hover:text-white transition-colors py-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Blog
+                  </NavLink>
+                  <NavLink
+                    to="/docs"
+                    className="block text-xl text-gray-400 hover:text-white transition-colors py-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Docs
+                  </NavLink>
+                  <NavLink
+                    to="/changelog"
+                    className="block text-xl text-gray-400 hover:text-white transition-colors py-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Changelog
+                  </NavLink>
+                </div>
+              </div>
+
+              {/* Community Section */}
+              <div className="py-3">
+                <p className="text-3xl font-semibold text-white mb-4">Community</p>
+                <div className="pl-4 space-y-2">
+                  <a
+                    href="https://x.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-xl text-gray-400 hover:text-white transition-colors py-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    X.com
+                  </a>
+                  <a
+                    href="https://linkedin.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-xl text-gray-400 hover:text-white transition-colors py-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    LinkedIn
+                  </a>
+                  <a
+                    href="https://youtube.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-xl text-gray-400 hover:text-white transition-colors py-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    YouTube
+                  </a>
+                  <a
+                    href="https://slack.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-xl text-gray-400 hover:text-white transition-colors py-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Slack
+                  </a>
+                  <a
+                    href="https://github.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-xl text-gray-400 hover:text-white transition-colors py-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    GitHub
+                  </a>
+                </div>
+              </div>
+
               <NavLink
-                to="/pricing"
-                className={({ isActive }) =>
-                  `text-gray-300 hover:text-white transition-colors font-medium ${isActive ? 'text-white' : ''}`
-                }
+                to="/download"
+                className="block text-3xl font-semibold text-white hover:text-gray-300 transition-colors py-3"
+                onClick={() => setIsOpen(false)}
               >
-                Pricing
+                Download
               </NavLink>
-
-              {/* Resources Dropdown */}
-              <div className="relative">
-                <button
-                  onMouseEnter={() => setResourcesOpen(true)}
-                  onMouseLeave={() => setResourcesOpen(false)}
-                  className="text-gray-300 hover:text-white transition-colors font-medium flex items-center space-x-1"
-                >
-                  <span>Resources</span>
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                {resourcesOpen && (
-                  <div 
-                    onMouseEnter={() => setResourcesOpen(true)}
-                    onMouseLeave={() => setResourcesOpen(false)}
-                    className="absolute top-full mt-2 w-56 bg-[#1a1a1a] border border-gray-800 rounded-xl shadow-2xl py-2"
-                  >
-                    <a href="#" className="block px-5 py-3 text-gray-300 hover:text-white hover:bg-white/5 transition-colors">
-                      <div className="font-medium">Documentation</div>
-                      <div className="text-sm text-gray-500">Learn how to use Huly</div>
-                    </a>
-                    <a href="#" className="block px-5 py-3 text-gray-300 hover:text-white hover:bg-white/5 transition-colors">
-                      <div className="font-medium">API Reference</div>
-                      <div className="text-sm text-gray-500">Integrate with your tools</div>
-                    </a>
-                    <a href="#" className="block px-5 py-3 text-gray-300 hover:text-white hover:bg-white/5 transition-colors">
-                      <div className="font-medium">Changelog</div>
-                      <div className="text-sm text-gray-500">See what's new</div>
-                    </a>
-                  </div>
-                )}
-              </div>
-
-              {/* Community Dropdown */}
-              <div className="relative">
-                <button
-                  onMouseEnter={() => setCommunityOpen(true)}
-                  onMouseLeave={() => setCommunityOpen(false)}
-                  className="text-gray-300 hover:text-white transition-colors font-medium flex items-center space-x-1"
-                >
-                  <span>Community</span>
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                {communityOpen && (
-                  <div 
-                    onMouseEnter={() => setCommunityOpen(true)}
-                    onMouseLeave={() => setCommunityOpen(false)}
-                    className="absolute top-full mt-2 w-56 bg-[#1a1a1a] border border-gray-800 rounded-xl shadow-2xl py-2"
-                  >
-                    <a href="#" className="block px-5 py-3 text-gray-300 hover:text-white hover:bg-white/5 transition-colors">
-                      <div className="flex items-center gap-3">
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
-                        </svg>
-                        <span>Discord</span>
-                      </div>
-                    </a>
-                    <a href="#" className="block px-5 py-3 text-gray-300 hover:text-white hover:bg-white/5 transition-colors">
-                      <div className="flex items-center gap-3">
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                        <span>GitHub</span>
-                      </div>
-                    </a>
-                    <a href="#" className="block px-5 py-3 text-gray-300 hover:text-white hover:bg-white/5 transition-colors">
-                      <div className="flex items-center gap-3">
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
-                        </svg>
-                        <span>Twitter</span>
-                      </div>
-                    </a>
-                  </div>
-                )}
-              </div>
             </div>
 
-            {/* CTA Buttons */}
-            <div className="flex items-center space-x-4">
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-300 hover:text-white transition-colors flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-white/5"
+            <div className="mt-12 pt-8 border-t border-white/10 space-y-4">
+              <NavLink 
+                to="/signin"
+                className="block w-full px-6 py-3 text-center border border-gray-600 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors"
+                onClick={() => setIsOpen(false)}
               >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-                <span className="font-medium">Star Us</span>
-              </a>
-              <button className="text-gray-300 hover:text-white transition-colors font-medium px-4 py-2">
                 Sign In
-              </button>
-              <button className="px-6 py-2.5 bg-white text-black rounded-full font-medium hover:scale-105 transition-transform duration-200 shadow-lg">
+              </NavLink>
+              <NavLink 
+                to="/signup"
+                className="block w-full px-6 py-3 text-center bg-white text-black rounded-lg font-medium hover:bg-gray-100 transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
                 Get Started
-              </button>
+              </NavLink>
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden text-white p-2"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {isOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
+          {/* Social links at bottom */}
+          <div className="pb-8 pt-4 border-t border-white/10">
+            <div className="flex justify-center space-x-6">
+              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"/>
+                </svg>
+              </a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
         </div>
-
-        {/* Mobile Menu */}
-        {isOpen && (
-          <div className="lg:hidden bg-[#1a1a1a] border-t border-gray-800 rounded-b-2xl">
-            <div className="p-4 space-y-4">
-              <NavLink
-                to="/features"
-                className="block text-gray-300 hover:text-white transition-colors font-medium py-2"
-                onClick={() => setIsOpen(false)}
-              >
-                Features
-              </NavLink>
-              <NavLink
-                to="/pricing"
-                className="block text-gray-300 hover:text-white transition-colors font-medium py-2"
-                onClick={() => setIsOpen(false)}
-              >
-                Pricing
-              </NavLink>
-              <NavLink
-                to="/about"
-                className="block text-gray-300 hover:text-white transition-colors font-medium py-2"
-                onClick={() => setIsOpen(false)}
-              >
-                About
-              </NavLink>
-              <div className="pt-4 border-t border-gray-800 space-y-3">
-                <button className="w-full text-left text-gray-300 hover:text-white transition-colors font-medium py-2">
-                  Sign In
-                </button>
-                <button className="w-full px-6 py-3 bg-white text-black rounded-full font-medium hover:scale-105 transition-transform">
-                  Get Started
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
-    </nav>
+    </>
   )
 }
 

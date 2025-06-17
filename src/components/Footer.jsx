@@ -2,152 +2,148 @@ import { Link } from 'react-router-dom'
 
 function Footer() {
   return (
-    <footer className="bg-huly-dark-secondary border-t border-gray-800">
-      <div className="container-custom py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+    <footer className="bg-huly-dark border-t border-white/10">
+      <div className="container-custom py-12 md:py-16">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
           {/* Brand */}
-          <div className="md:col-span-1">
-            <Link to="/" className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-huly-blue rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">H</span>
-              </div>
-              <span className="text-xl font-semibold text-white">Huly</span>
+          <div className="md:col-span-2 lg:col-span-1">
+            <Link to="/" className="inline-block mb-6">
+              <img 
+                src="https://fchtwxunzmkzbnibqbwl.supabase.co/storage/v1/object/sign/kushie01/aq1.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9hYzRiNjM2NS0xMjBkLTQ2ZWEtYWVhOC1mMjIxMWEwNWRiNzIiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJrdXNoaWUwMS9hcTEucG5nIiwiaWF0IjoxNzUwMTg3NzU2LCJleHAiOjIwNjU1NDc3NTZ9.rtUfRHavxCvpwK8brcPcGaoVxrfVlqxztzb_rg9uEKg"
+                alt="Kushie Brand"
+                className="h-10 w-auto object-contain"
+              />
             </Link>
-            <p className="text-gray-400 text-sm">
-              Everything App for your teams. All-in-One Project Management Platform.
+            <p className="text-gray-400 text-sm mb-4 max-w-xs font-light">
+              Premium hand-crafted cannabis products from Los Angeles, California.
             </p>
+            <div className="text-sm text-gray-500">
+              21+ Only • Adults Only
+            </div>
           </div>
 
-          {/* Product */}
+          {/* Products */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Product</h3>
+            <h3 className="text-white font-medium mb-4">Products</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/features" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Features
+                <Link to="/products/cartridges" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Distillate Cartridges
                 </Link>
               </li>
               <li>
-                <Link to="/pricing" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Pricing
+                <Link to="/products/disposables" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Disposables
                 </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Integrations
-                </a>
+                <Link to="/products/prerolls" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Infused Prerolls
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Changelog
-                </a>
+                <Link to="/products/pods" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Pods & Batteries
+                </Link>
               </li>
             </ul>
           </div>
 
-          {/* Resources */}
+          {/* Information */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Resources</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Documentation
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  API Reference
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Support
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h3 className="text-white font-semibold mb-4">Company</h3>
+            <h3 className="text-white font-medium mb-4">Company</h3>
             <ul className="space-y-2">
               <li>
                 <Link to="/about" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  About
+                  About Us
                 </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Careers
-                </a>
+                <Link to="/lab-results" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Lab Results
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Contact
-                </a>
+                <Link to="/locations" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Find Retailers
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Privacy
-                </a>
+                <Link to="/wholesale" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Wholesale
+                </Link>
               </li>
             </ul>
           </div>
+
+          {/* Connect */}
+          <div>
+            <h3 className="text-white font-medium mb-4">Stay Updated</h3>
+            <p className="text-gray-400 text-sm mb-4">
+              Get the latest product drops and exclusive offers.
+            </p>
+            <form className="flex flex-col space-y-3">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="px-4 py-2.5 bg-white/5 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-huly-blue transition-colors text-sm"
+              />
+              <button
+                type="submit"
+                className="px-4 py-2.5 bg-huly-blue text-white rounded-lg font-medium hover:bg-huly-blue/90 transition-colors text-sm"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
         </div>
 
-        {/* Newsletter */}
-        <div className="border-t border-gray-800 pt-8 pb-4">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex-1 max-w-md">
-              <h4 className="text-white font-medium mb-2">Subscribe to our newsletter</h4>
-              <form className="flex gap-2">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 px-4 py-2 bg-huly-dark rounded-lg border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-huly-blue"
-                />
-                <button
-                  type="submit"
-                  className="px-6 py-2 bg-huly-blue text-white rounded-lg font-medium btn-glow btn-glow-blue"
-                >
-                  Subscribe
-                </button>
-              </form>
+        {/* Bottom Section */}
+        <div className="border-t border-white/10 pt-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            {/* Copyright and Legal */}
+            <div className="flex flex-col md:flex-row items-center gap-4 text-sm text-gray-400">
+              <p>&copy; 2024 Kushie Brand. All rights reserved.</p>
+              <div className="flex items-center space-x-4">
+                <Link to="/terms" className="hover:text-white transition-colors">Terms</Link>
+                <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+                <Link to="/compliance" className="hover:text-white transition-colors">Compliance</Link>
+              </div>
             </div>
 
             {/* Social Links */}
             <div className="flex items-center space-x-4">
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                 </svg>
               </a>
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"/>
                 </svg>
               </a>
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                </svg>
+              </a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
                 </svg>
               </a>
             </div>
           </div>
-        </div>
 
-        {/* Bottom */}
-        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-400">
-          <p>&copy; 2024 Huly. All rights reserved.</p>
-          <div className="flex items-center space-x-6">
-            <a href="#" className="hover:text-white transition-colors">Terms</a>
-            <a href="#" className="hover:text-white transition-colors">Privacy</a>
-            <a href="#" className="hover:text-white transition-colors">Cookies</a>
+          {/* Disclaimer */}
+          <div className="mt-8 pt-8 border-t border-white/10 text-center">
+            <p className="text-xs text-gray-500 max-w-3xl mx-auto">
+              WARNING: Products contain THC. Keep out of reach of children and animals. 
+              Cannabis products may only be purchased by adults 21 years of age or older. 
+              Use of cannabis products may impair your ability to drive and operate machinery.
+            </p>
           </div>
         </div>
       </div>
