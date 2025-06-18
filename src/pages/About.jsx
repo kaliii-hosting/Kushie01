@@ -11,7 +11,7 @@ function About() {
     <div ref={aboutRef} className="min-h-screen py-20 bg-huly-dark">
       <div className="container-custom">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold mb-8 text-gradient text-center">
+          <h1 className="text-5xl md:text-7xl font-bold mb-8 text-neon-orange text-center">
             About Huly
           </h1>
           

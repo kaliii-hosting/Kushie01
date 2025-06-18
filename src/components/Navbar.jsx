@@ -1,25 +1,23 @@
 import { useState, useEffect } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import { Menu, X, ChevronDown } from 'lucide-react'
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const [showResourcesDropdown, setShowResourcesDropdown] = useState(false)
-  const [showCommunityDropdown, setShowCommunityDropdown] = useState(false)
-
-  const logoUrl = "https://fchtwxunzmkzbnibqbwl.supabase.co/storage/v1/object/sign/kushie01/aq1.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9hYzRiNjM2NS0xMjBkLTQ2ZWEtYWVhOC1mMjIxMWEwNWRiNzIiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJrdXNoaWUwMS9hcTEucG5nIiwiaWF0IjoxNzUwMTg3NzU2LCJleHAiOjIwNjU1NDc3NTZ9.rtUfRHavxCvpwK8brcPcGaoVxrfVlqxztzb_rg9uEKg"
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [showMegaMenu, setShowMegaMenu] = useState(false)
+  const [openMobileDropdown, setOpenMobileDropdown] = useState(null)
+  const location = useLocation()
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
+      setIsScrolled(window.scrollY > 10)
     }
-
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   useEffect(() => {
-    // Prevent scroll when mobile menu is open
     if (isOpen) {
       document.body.style.overflow = 'hidden'
     } else {
@@ -27,297 +25,275 @@ function Navbar() {
     }
   }, [isOpen])
 
+  const navItems = [
+    { name: 'Home', path: '/' },
+    { name: 'Products', path: '/products', hasMegaMenu: true },
+    { name: 'About', path: '/about' },
+    { name: 'Wholesale', path: '/wholesale' },
+    { name: 'News', path: '/news' },
+    { name: 'Contact', path: '/contact' }
+  ]
+
+  const megaMenuCategories = [
+    {
+      title: 'BATTERIES',
+      image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=200',
+      products: [
+        { name: 'BAR Battery', path: '/batteries' },
+        { name: 'Pro Battery', path: '/batteries' },
+        { name: 'Pro XL Battery', path: '/batteries' },
+        { name: 'Original Battery', path: '/batteries' },
+        { name: 'BIIIG Battery', path: '/batteries' }
+      ]
+    },
+    {
+      title: 'PODS',
+      image: 'https://images.unsplash.com/photo-1586104237516-6b5c3a5e9cef?w=200',
+      products: [
+        { name: 'Starter Pack', path: '/pods' },
+        { name: 'Original THC', path: '/pods' },
+        { name: 'Live Resin Liquid Diamonds', path: '/pods/live-resin' },
+        { name: 'All-in-One THC Pens', path: '/pods' },
+        { name: 'LRLD AIO THC Pens', path: '/pods' },
+        { name: 'LIIIL AIO THC Pens', path: '/pods' }
+      ]
+    },
+    {
+      title: 'FLOWER',
+      image: 'https://images.unsplash.com/photo-1536819114556-1e10f967fb61?w=200',
+      products: [
+        { name: 'Exotics Flower', path: '/prerolls' },
+        { name: 'Exotics Pre-Rolls', path: '/prerolls' },
+        { name: 'Black Label', path: '/prerolls' },
+        { name: 'Grey Label', path: '/prerolls' },
+        { name: 'White Label', path: '/prerolls' },
+        { name: "40's Infused Flower", path: '/prerolls/infused' },
+        { name: "40's Infused Pre-Rolls", path: '/prerolls/infused' },
+        { name: "40's Infused Blunts", path: '/prerolls/infused' },
+        { name: 'Pre-Rolls', path: '/prerolls/regular' }
+      ]
+    },
+    {
+      title: 'EXTRACTS',
+      image: 'https://images.unsplash.com/photo-1598662957563-ee4965d4d72c?w=200',
+      products: [
+        { name: 'Curated Live Resin', path: '/cartridges' },
+        { name: 'Live Resin Diamonds', path: '/cartridges/diamonds' },
+        { name: 'Crushed Diamond Extracts', path: '/cartridges/diamonds' },
+        { name: 'Live Rosin Badder', path: '/cartridges' },
+        { name: 'Live Rosin Jam', path: '/cartridges' }
+      ]
+    },
+    {
+      title: 'EDIBLES',
+      image: 'https://images.unsplash.com/photo-1566478989037-eec170784d0b?w=200',
+      products: [
+        { name: '200mg Gummy Edibles', path: '/merch' },
+        { name: '100mg Gummy Edibles', path: '/merch' },
+        { name: '2:1 Gummy Edibles', path: '/merch' }
+      ]
+    }
+  ]
+
+  const mobileMenuItems = [
+    { name: 'Home', path: '/' },
+    { 
+      name: 'Products', 
+      path: '/products',
+      submenu: [
+        { name: 'All Products', path: '/products' },
+        { name: 'Batteries', path: '/batteries' },
+        { name: 'Pods', path: '/pods' },
+        { name: 'Cartridges', path: '/cartridges' },
+        { name: 'Disposables', path: '/disposables' },
+        { name: 'Prerolls', path: '/prerolls' },
+        { name: 'Merch', path: '/merch' }
+      ]
+    },
+    { name: 'About', path: '/about' },
+    { name: 'Wholesale', path: '/wholesale' },
+    { name: 'News', path: '/news' },
+    { name: 'Contact', path: '/contact' }
+  ]
+
+  const logoUrl = "https://fchtwxunzmkzbnibqbwl.supabase.co/storage/v1/object/public/kushie01//Logo%20Kushie%20(W-SVG).svg"
+
   return (
     <>
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-black/95 backdrop-blur-xl border-b border-white/10' : 'bg-transparent'
+      <nav className={`fixed w-full z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-black/95 backdrop-blur-md' : 'bg-black/80'
       }`}>
-        <div className="w-full">
-          <div className="flex items-center justify-between h-14 sm:h-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+        <div className="w-full px-6 sm:px-8 lg:px-12">
+          <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <Link to="/" className="flex items-center">
-              <img 
-                src={logoUrl} 
-                alt="Kushie Brand" 
-                className="h-8 sm:h-10 w-auto object-contain"
-              />
+            <Link to="/" className="flex items-center py-4">
+              <img src={logoUrl} alt="Kushie Brand" className="h-12 w-auto" />
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-6 xl:space-x-10">
-              <div className="flex items-center space-x-6 xl:space-x-8">
-                <NavLink
-                  to="/pricing"
-                  className={({ isActive }) =>
-                    `text-gray-300 hover:text-white transition-colors font-medium text-sm ${isActive ? 'text-white' : ''}`
-                  }
-                >
-                  Pricing
-                </NavLink>
-                
-                {/* Resources Dropdown */}
-                <div 
-                  className="relative"
-                  onMouseEnter={() => setShowResourcesDropdown(true)}
-                  onMouseLeave={() => setShowResourcesDropdown(false)}
-                >
-                  <button className="text-gray-300 hover:text-white transition-colors font-medium text-sm flex items-center space-x-1">
-                    <span>Resources</span>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
-                  {showResourcesDropdown && (
-                    <div className="absolute top-full left-0 mt-2 w-48 bg-gray-900 rounded-lg shadow-xl py-2 border border-gray-800">
-                      <NavLink to="/blog" className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 transition-colors">
-                        Blog
-                      </NavLink>
-                      <NavLink to="/docs" className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 transition-colors">
-                        Docs
-                      </NavLink>
-                      <NavLink to="/changelog" className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 transition-colors">
-                        Changelog
-                      </NavLink>
-                    </div>
+            {/* Desktop Menu */}
+            <div className="hidden lg:flex items-center space-x-10">
+              {navItems.map((item) => (
+                <div key={item.name} className="relative">
+                  {item.hasMegaMenu ? (
+                    <button
+                      className={`px-3 py-2 text-sm font-medium transition-colors duration-200 flex items-center ${
+                        location.pathname.startsWith(item.path)
+                          ? 'text-neon-orange'
+                          : 'text-white hover:text-neon-orange'
+                      }`}
+                      onMouseEnter={() => setShowMegaMenu(true)}
+                      onMouseLeave={() => setShowMegaMenu(false)}
+                    >
+                      {item.name}
+                      <ChevronDown className="ml-1 h-4 w-4" />
+                    </button>
+                  ) : (
+                    <Link
+                      to={item.path}
+                      className={`px-3 py-2 text-sm font-medium transition-colors duration-200 ${
+                        location.pathname === item.path
+                          ? 'text-neon-orange'
+                          : 'text-white hover:text-neon-orange'
+                      }`}
+                    >
+                      {item.name}
+                    </Link>
                   )}
                 </div>
-
-                {/* Community Dropdown */}
-                <div 
-                  className="relative"
-                  onMouseEnter={() => setShowCommunityDropdown(true)}
-                  onMouseLeave={() => setShowCommunityDropdown(false)}
-                >
-                  <button className="text-gray-300 hover:text-white transition-colors font-medium text-sm flex items-center space-x-1">
-                    <span>Community</span>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
-                  {showCommunityDropdown && (
-                    <div className="absolute top-full left-0 mt-2 w-48 bg-gray-900 rounded-lg shadow-xl py-2 border border-gray-800">
-                      <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 transition-colors">
-                        X.com
-                      </a>
-                      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 transition-colors">
-                        LinkedIn
-                      </a>
-                      <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 transition-colors">
-                        YouTube
-                      </a>
-                      <a href="https://slack.com" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 transition-colors">
-                        Slack
-                      </a>
-                      <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 transition-colors">
-                        GitHub
-                      </a>
-                    </div>
-                  )}
-                </div>
-
-                <NavLink
-                  to="/download"
-                  className={({ isActive }) =>
-                    `text-gray-300 hover:text-white transition-colors font-medium text-sm ${isActive ? 'text-white' : ''}`
-                  }
-                >
-                  Download
-                </NavLink>
-              </div>
-
-              {/* CTA Buttons */}
-              <div className="flex items-center lg:space-x-3 xl:space-x-4">
-                <a 
-                  href="https://github.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-3 py-2 lg:px-4 text-gray-300 hover:text-white transition-colors font-medium text-sm flex items-center space-x-2"
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
-                  </svg>
-                  <span>Star Us</span>
-                </a>
-                <NavLink
-                  to="/signin"
-                  className="px-3 py-2 lg:px-4 text-gray-300 hover:text-white transition-colors font-medium text-sm"
-                >
-                  Sign In
-                </NavLink>
-                <NavLink
-                  to="/signup"
-                  className="px-4 py-2 lg:px-6 bg-white text-black rounded-lg font-medium text-sm hover:bg-gray-100 transition-colors"
-                >
-                  Get Started
-                </NavLink>
-              </div>
+              ))}
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile menu button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden text-white relative z-50 min-w-[44px] min-h-[44px] flex items-center justify-center"
-              aria-label="Toggle menu"
+              className="lg:hidden inline-flex items-center justify-center p-3 rounded-md text-white hover:text-neon-orange focus:outline-none"
             >
-              <div className="w-6 h-5 relative flex flex-col justify-between">
-                <span className={`block h-0.5 w-full bg-white transform transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`} />
-                <span className={`block h-0.5 w-full bg-white transition-all duration-300 ${isOpen ? 'opacity-0' : ''}`} />
-                <span className={`block h-0.5 w-full bg-white transform transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`} />
-              </div>
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
+          </div>
+        </div>
+
+        {/* Mega Menu */}
+        <div 
+          className={`absolute left-0 w-full bg-black/95 backdrop-blur-xl transition-all duration-300 ${
+            showMegaMenu ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-4'
+          }`}
+          onMouseEnter={() => setShowMegaMenu(true)}
+          onMouseLeave={() => setShowMegaMenu(false)}
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="grid grid-cols-5 gap-8">
+              {megaMenuCategories.map((category, index) => (
+                <div key={index} className="space-y-4">
+                  <div className="relative overflow-hidden rounded-lg">
+                    <img 
+                      src={category.image} 
+                      alt={category.title}
+                      className="w-full h-32 object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                    <h3 className="absolute bottom-2 left-2 text-white font-bold text-lg">
+                      {category.title}
+                    </h3>
+                  </div>
+                  <ul className="space-y-2">
+                    {category.products.map((product, idx) => (
+                      <li key={idx}>
+                        <Link
+                          to={product.path}
+                          className="text-sm text-gray-400 hover:text-neon-orange transition-colors block"
+                          onClick={() => setShowMegaMenu(false)}
+                        >
+                          {product.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </nav>
 
-      {/* Mobile Menu - Responsive Full Screen */}
-      <div className={`fixed inset-0 bg-black z-40 lg:hidden transition-all duration-500 ${
+      {/* Mobile Menu */}
+      <div className={`fixed inset-0 bg-black z-40 lg:hidden transition-all duration-300 ${
         isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
       }`}>
-        <div className={`h-full flex flex-col transition-all duration-500 ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}>
-          {/* Menu Content - Dynamic height based on viewport */}
-          <div className="flex-1 flex flex-col pt-16 sm:pt-20 px-6 sm:px-8 md:px-12" style={{ height: '100vh', maxHeight: '100vh' }}>
-            {/* Main Navigation - Compact spacing for small screens */}
-            <nav className="flex-1 flex flex-col justify-between py-4">
-              {/* Menu Items */}
-              <div className="space-y-1">
-                <NavLink
-                  to="/pricing"
-                  className="block text-xl sm:text-2xl font-semibold text-white hover:text-gray-300 transition-colors py-2 sm:py-3"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Pricing
-                </NavLink>
-                
-                {/* Resources Section - Collapsible on mobile */}
-                <div className="py-2 sm:py-3">
-                  <p className="text-xl sm:text-2xl font-semibold text-white mb-2">Resources</p>
-                  <div className="pl-4 space-y-1">
-                    <NavLink
-                      to="/blog"
-                      className="block text-base sm:text-lg text-gray-400 hover:text-white transition-colors py-1"
+        <div className={`h-full flex flex-col ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        } transition-transform duration-300`}>
+          {/* Mobile Header with Logo */}
+          <div className="flex items-center justify-between p-6 border-b border-gray-800">
+            <Link to="/" onClick={() => setIsOpen(false)} className="py-2">
+              <img src={logoUrl} alt="Kushie Brand" className="h-10 w-auto" />
+            </Link>
+            <button
+              onClick={() => setIsOpen(false)}
+              className="p-3 text-white hover:text-neon-orange"
+            >
+              <X className="h-6 w-6" />
+            </button>
+          </div>
+
+          {/* Mobile Menu Items */}
+          <div className="flex-1 overflow-y-auto">
+            <nav className="px-4 py-6">
+              {mobileMenuItems.map((item) => (
+                <div key={item.name} className="border-b border-gray-800 last:border-0">
+                  {item.submenu ? (
+                    <>
+                      <button
+                        onClick={() => setOpenMobileDropdown(
+                          openMobileDropdown === item.name ? null : item.name
+                        )}
+                        className="w-full flex items-center justify-between py-4 text-lg font-medium text-white hover:text-neon-orange transition-colors"
+                      >
+                        {item.name}
+                        <ChevronDown className={`h-5 w-5 transition-transform ${
+                          openMobileDropdown === item.name ? 'rotate-180' : ''
+                        }`} />
+                      </button>
+                      <div className={`overflow-hidden transition-all duration-300 ${
+                        openMobileDropdown === item.name ? 'max-h-96' : 'max-h-0'
+                      }`}>
+                        <div className="pb-4 pl-4 space-y-2">
+                          {item.submenu.map((subItem) => (
+                            <Link
+                              key={subItem.path}
+                              to={subItem.path}
+                              className="block py-2 text-gray-400 hover:text-neon-orange transition-colors"
+                              onClick={() => setIsOpen(false)}
+                            >
+                              {subItem.name}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <Link
+                      to={item.path}
+                      className="block py-4 text-lg font-medium text-white hover:text-neon-orange transition-colors"
                       onClick={() => setIsOpen(false)}
                     >
-                      Blog
-                    </NavLink>
-                    <NavLink
-                      to="/docs"
-                      className="block text-base sm:text-lg text-gray-400 hover:text-white transition-colors py-1"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Docs
-                    </NavLink>
-                    <NavLink
-                      to="/changelog"
-                      className="block text-base sm:text-lg text-gray-400 hover:text-white transition-colors py-1"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Changelog
-                    </NavLink>
-                  </div>
+                      {item.name}
+                    </Link>
+                  )}
                 </div>
-
-                {/* Community Section - Compact for mobile */}
-                <div className="py-2 sm:py-3">
-                  <p className="text-xl sm:text-2xl font-semibold text-white mb-2">Community</p>
-                  <div className="pl-4 grid grid-cols-2 gap-x-4 gap-y-1">
-                    <a
-                      href="https://x.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-base sm:text-lg text-gray-400 hover:text-white transition-colors py-1"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      X.com
-                    </a>
-                    <a
-                      href="https://linkedin.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-base sm:text-lg text-gray-400 hover:text-white transition-colors py-1"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      LinkedIn
-                    </a>
-                    <a
-                      href="https://youtube.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-base sm:text-lg text-gray-400 hover:text-white transition-colors py-1"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      YouTube
-                    </a>
-                    <a
-                      href="https://slack.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-base sm:text-lg text-gray-400 hover:text-white transition-colors py-1"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Slack
-                    </a>
-                    <a
-                      href="https://github.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-base sm:text-lg text-gray-400 hover:text-white transition-colors py-1 col-span-2"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      GitHub
-                    </a>
-                  </div>
-                </div>
-
-                <NavLink
-                  to="/download"
-                  className="block text-xl sm:text-2xl font-semibold text-white hover:text-gray-300 transition-colors py-2 sm:py-3"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Download
-                </NavLink>
-              </div>
-
-              {/* CTA Buttons - Fixed at bottom */}
-              <div className="space-y-2 mt-4">
-                <NavLink 
-                  to="/signin"
-                  className="block w-full px-4 py-2.5 text-center border border-gray-600 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Sign In
-                </NavLink>
-                <NavLink 
-                  to="/signup"
-                  className="block w-full px-4 py-2.5 text-center bg-white text-black rounded-lg font-medium hover:bg-gray-100 transition-colors"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Get Started
-                </NavLink>
-              </div>
+              ))}
             </nav>
+          </div>
 
-            {/* Social links - Compact at very bottom */}
-            <div className="py-4 border-t border-white/10">
-              <div className="flex justify-center space-x-6">
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                  </svg>
-                </a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"/>
-                  </svg>
-                </a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-                  </svg>
-                </a>
-              </div>
-            </div>
+          {/* Mobile Footer */}
+          <div className="p-4 border-t border-gray-800">
+            <Link 
+              to="/wholesale"
+              className="block w-full py-3 text-center bg-neon-orange text-white rounded-lg font-medium hover:bg-neon-orange-hover transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              BECOME A PARTNER
+            </Link>
           </div>
         </div>
       </div>

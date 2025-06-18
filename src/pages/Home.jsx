@@ -18,7 +18,7 @@ function Home() {
       <section className="py-24 bg-gray-50">
         <div className="container-custom">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-semibold text-gray-900 mb-4">
+            <h2 className="text-4xl md:text-5xl font-semibold text-neon-orange mb-4">
               Unmatched productivity
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
@@ -127,8 +127,8 @@ function Home() {
         <div className="container-custom">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold mb-4">
-              <span className="text-gradient">Premium</span>
-              <span className="text-white"> Products</span>
+              <span className="text-neon-orange">Premium</span>
+              <span className="text-neon-orange"> Products</span>
             </h2>
             <p className="text-lg text-gray-400 max-w-2xl mx-auto font-light">
               Hand-crafted cannabis products using only top-shelf quality flower
@@ -247,8 +247,8 @@ function Home() {
         <div className="container-custom relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold mb-6">
-              <span className="text-white">Find Products </span>
-              <span className="text-gradient">Near You</span>
+              <span className="text-neon-orange">Find Products </span>
+              <span className="text-neon-orange">Near You</span>
             </h2>
             <p className="text-lg text-gray-400 mb-12 max-w-2xl mx-auto font-light">
               Available at select licensed dispensaries throughout California. 

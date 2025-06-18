@@ -4,6 +4,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom CSS Variables for Brand Colors */
+:root {
+  --color-neon-orange: #FF6B35;
+  --color-neon-orange-hover: #FF8C5A;
+  --color-neon-orange-light: #FFB088;
+}
+
 body {
   margin: 0;
   padding: 0;

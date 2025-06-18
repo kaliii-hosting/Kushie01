@@ -13,6 +13,12 @@ export default {
         'huly-blue': '#478BEB',
         'huly-orange': '#FF5F0B',
         'huly-gradient': '#D1D4FA',
+        'neon-orange': {
+          DEFAULT: '#FF6B35',
+          hover: '#FF8C5A',
+          light: '#FFB088',
+          dark: '#E54D1B',
+        },
       },
       fontFamily: {
         'title': ['Inter', 'system-ui', 'sans-serif'],

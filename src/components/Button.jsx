@@ -13,10 +13,10 @@ function Button({
   const baseStyles = 'font-medium rounded-lg transition-all duration-300 inline-flex items-center justify-center'
   
   const variants = {
-    primary: 'bg-huly-blue text-white btn-glow btn-glow-blue hover:brightness-110',
-    secondary: 'bg-huly-orange text-white btn-glow btn-glow-orange hover:brightness-110',
-    outline: 'border border-gray-600 text-white hover:border-gray-400',
-    ghost: 'text-gray-300 hover:text-white hover:bg-white/10'
+    primary: 'bg-neon-orange text-white btn-glow hover:bg-neon-orange-hover',
+    secondary: 'bg-huly-blue text-white btn-glow btn-glow-blue hover:brightness-110',
+    outline: 'border border-neon-orange text-neon-orange hover:bg-neon-orange hover:text-white',
+    ghost: 'text-gray-300 hover:text-neon-orange hover:bg-neon-orange/10'
   }
 
   const sizes = {
